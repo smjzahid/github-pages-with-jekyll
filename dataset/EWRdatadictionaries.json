@@ -1,0 +1,65 @@
+{
+	"name": "EWRdatadictionaries",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Ewr Data Dictionaries Milestones.csv",
+				"container": "datastore"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Project ID",
+				"type": "String"
+			},
+			{
+				"name": "Project Name",
+				"type": "String"
+			},
+			{
+				"name": "Total Activities",
+				"type": "String"
+			},
+			{
+				"name": "Strategic Priority",
+				"type": "String"
+			},
+			{
+				"name": "Date Added",
+				"type": "String"
+			},
+			{
+				"name": "Added By",
+				"type": "String"
+			},
+			{
+				"name": "Project Status",
+				"type": "String"
+			},
+			{
+				"name": "Responsible Manager",
+				"type": "String"
+			},
+			{
+				"name": "Data Date",
+				"type": "String"
+			},
+			{
+				"name": "Prop_9",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

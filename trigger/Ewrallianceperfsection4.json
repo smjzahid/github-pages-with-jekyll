@@ -1,0 +1,22 @@
+{
+	"name": "Ewrallianceperfsection4",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Month",
+				"interval": 1,
+				"startTime": "2019-08-20T16:47:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"monthDays": [
+						1
+					]
+				}
+			}
+		}
+	}
+}

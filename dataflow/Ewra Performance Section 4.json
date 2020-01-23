@@ -1,0 +1,63 @@
+{
+	"name": "Ewra Performance Section 4",
+	"properties": {
+		"description": "This ETL/ELT does Data transformation to EWR Alliance Section 4 Report",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "EWRDataSection4Programme",
+						"type": "DatasetReference"
+					},
+					"name": "StagingProgramme"
+				},
+				{
+					"dataset": {
+						"referenceName": "EWRdatadictionaries",
+						"type": "DatasetReference"
+					},
+					"name": "StagingProject"
+				},
+				{
+					"dataset": {
+						"referenceName": "mappingkeymilestone",
+						"type": "DatasetReference"
+					},
+					"name": "mappingkeymilestones"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "CleansedData"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "CleansedDimProgmappingkey"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ProgProjectJoin"
+				},
+				{
+					"name": "DimPeriodnumber"
+				},
+				{
+					"name": "Expandedkeymilestone"
+				},
+				{
+					"name": "dimprogkeymilestone"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\t{Project ID} as string,\n\t\t{Project Name} as string,\n\t\tWBS as string,\n\t\t{WBS Name} as string,\n\t\t{Activity ID} as string,\n\t\t{Activity Name} as string,\n\t\tStart as date,\n\t\t{Early Start} as date,\n\t\t{Planned Start} as date,\n\t\t{Late Start} as string,\n\t\t{Actual Start} as string,\n\t\t{Anticipated Start} as string,\n\t\tFinish as string,\n\t\t{Early Finish} as string,\n\t\t{Planned Finish} as string,\n\t\t{Late Finish} as string,\n\t\t{Actual Finish} as string,\n\t\t{Anticipated Finish} as string,\n\t\t{Primary Constraint Date} as string,\n\t\t{Primary Constraint} as string,\n\t\t{Remaining Duration} as string,\n\t\t{Percent Complete Type} as string,\n\t\t{Performance % Complete} as string,\n\t\t{Total Float} as string,\n\t\t{Float Path} as string,\n\t\t{Float Path Order} as string,\n\t\t{Activity Status} as string,\n\t\t{Budgeted Total Cost} as string,\n\t\t{Planned Value Cost} as string,\n\t\t{Budget At Completion} as string,\n\t\t{Earned Value Cost} as string,\n\t\t{Actual Total Cost} as string,\n\t\t{Remaining Total Cost} as string,\n\t\t{EWR_G4 CBS} as string,\n\t\tEWR_G4_COINS as string,\n\t\tCalendar as string,\n\t\tCritical as string,\n\t\tPredecessors as string,\n\t\tSuccessors as string,\n\t\t{Added Date} as date,\n\t\t{Added By} as string,\n\t\t{Activity Type} as string,\n\t\t{EWR_Key interface365} as string,\n\t\t{JB-G4} as string,\n\t\t{BL Project Start} as string,\n\t\t{BL Project Finish} as string,\n\t\t{BL1 Start} as date,\n\t\t{BL1 Finish} as date,\n\t\tEWR_Funding as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> StagingProgramme\nsource(output(\n\t\t{Project ID} as string,\n\t\t{Project Name} as string,\n\t\t{Total Activities} as string,\n\t\t{Strategic Priority} as string,\n\t\t{Date Added} as string,\n\t\t{Added By} as string,\n\t\t{Project Status} as string,\n\t\t{Responsible Manager} as string,\n\t\t{Data Date} as string,\n\t\tProp_9 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> StagingProject\nsource(output(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\twildcardPaths:['.csv']) ~> mappingkeymilestones\nStagingProgramme, StagingProject join(StagingProgramme@{Project ID} == StagingProject@{Project ID},\n\tjoinType:'left',\n\tbroadcast: 'none')~> ProgProjectJoin\nProgProjectJoin select(mapColumn(\n\t\t{Project ID} = {StagingProgramme@Project ID},\n\t\t{Project Name} = {StagingProgramme@Project Name},\n\t\tWBS,\n\t\t{WBS Name},\n\t\t{Activity ID},\n\t\t{Activity Name},\n\t\tStart,\n\t\t{Early Start},\n\t\t{Planned Start},\n\t\t{Late Start},\n\t\t{Actual Start},\n\t\t{Anticipated Start},\n\t\tFinish,\n\t\t{Early Finish},\n\t\t{Planned Finish},\n\t\t{Late Finish},\n\t\t{Actual Finish},\n\t\t{Anticipated Finish},\n\t\t{Primary Constraint Date},\n\t\t{Primary Constraint},\n\t\t{Remaining Duration},\n\t\t{Percent Complete Type},\n\t\t{Performance % Complete},\n\t\t{Total Float},\n\t\t{Float Path},\n\t\t{Float Path Order},\n\t\t{Activity Status},\n\t\t{Budgeted Total Cost},\n\t\t{Planned Value Cost},\n\t\t{Budget At Completion},\n\t\t{Earned Value Cost},\n\t\t{Actual Total Cost},\n\t\t{Remaining Total Cost},\n\t\t{EWR_G4 CBS},\n\t\tEWR_G4_COINS,\n\t\tCalendar,\n\t\tCritical,\n\t\tPredecessors,\n\t\tSuccessors,\n\t\t{Added Date},\n\t\t{Added By} = {StagingProgramme@Added By},\n\t\t{Activity Type},\n\t\t{EWR_Key interface365},\n\t\t{JB-G4},\n\t\t{BL Project Start},\n\t\t{BL Project Finish},\n\t\t{BL1 Start},\n\t\t{BL1 Finish},\n\t\tEWR_Funding,\n\t\t{Project ID} = {StagingProject@Project ID},\n\t\t{Project Name} = {StagingProject@Project Name},\n\t\t{Total Activities},\n\t\t{Strategic Priority},\n\t\t{Date Added},\n\t\t{Added By} = {StagingProject@Added By},\n\t\t{Project Status},\n\t\t{Responsible Manager},\n\t\t{Data Date},\n\t\tProp_9\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: false) ~> DimPeriodnumber\nmappingkeymilestones select(mapColumn(\n\t\tColumn_1,\n\t\tColumn_2,\n\t\tColumn_3\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Expandedkeymilestone\nExpandedkeymilestone, StagingProgramme join(Column_1 == {Activity ID},\n\tjoinType:'left',\n\tbroadcast: 'none')~> dimprogkeymilestone\nDimPeriodnumber sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> CleansedData\ndimprogkeymilestone sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> CleansedDimProgmappingkey"
+		}
+	}
+}

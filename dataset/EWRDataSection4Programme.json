@@ -1,0 +1,221 @@
+{
+	"name": "EWRDataSection4Programme",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EWR Data Section 4 Programme.csv",
+				"container": "datastore"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Project ID",
+				"type": "String"
+			},
+			{
+				"name": "Project Name",
+				"type": "String"
+			},
+			{
+				"name": "WBS",
+				"type": "String"
+			},
+			{
+				"name": "WBS Name",
+				"type": "String"
+			},
+			{
+				"name": "Activity ID",
+				"type": "String"
+			},
+			{
+				"name": "Activity Name",
+				"type": "String"
+			},
+			{
+				"name": "Start",
+				"type": "String"
+			},
+			{
+				"name": "Early Start",
+				"type": "String"
+			},
+			{
+				"name": "Planned Start",
+				"type": "String"
+			},
+			{
+				"name": "Late Start",
+				"type": "String"
+			},
+			{
+				"name": "Actual Start",
+				"type": "String"
+			},
+			{
+				"name": "Anticipated Start",
+				"type": "String"
+			},
+			{
+				"name": "Finish",
+				"type": "String"
+			},
+			{
+				"name": "Early Finish",
+				"type": "String"
+			},
+			{
+				"name": "Planned Finish",
+				"type": "String"
+			},
+			{
+				"name": "Late Finish",
+				"type": "String"
+			},
+			{
+				"name": "Actual Finish",
+				"type": "String"
+			},
+			{
+				"name": "Anticipated Finish",
+				"type": "String"
+			},
+			{
+				"name": "Primary Constraint Date",
+				"type": "String"
+			},
+			{
+				"name": "Primary Constraint",
+				"type": "String"
+			},
+			{
+				"name": "Remaining Duration",
+				"type": "String"
+			},
+			{
+				"name": "Percent Complete Type",
+				"type": "String"
+			},
+			{
+				"name": "Performance % Complete",
+				"type": "String"
+			},
+			{
+				"name": "Total Float",
+				"type": "String"
+			},
+			{
+				"name": "Float Path",
+				"type": "String"
+			},
+			{
+				"name": "Float Path Order",
+				"type": "String"
+			},
+			{
+				"name": "Activity Status",
+				"type": "String"
+			},
+			{
+				"name": "Budgeted Total Cost",
+				"type": "String"
+			},
+			{
+				"name": "Planned Value Cost",
+				"type": "String"
+			},
+			{
+				"name": "Budget At Completion",
+				"type": "String"
+			},
+			{
+				"name": "Earned Value Cost",
+				"type": "String"
+			},
+			{
+				"name": "Actual Total Cost",
+				"type": "String"
+			},
+			{
+				"name": "Remaining Total Cost",
+				"type": "String"
+			},
+			{
+				"name": "EWR_G4 CBS",
+				"type": "String"
+			},
+			{
+				"name": "EWR_G4_COINS",
+				"type": "String"
+			},
+			{
+				"name": "Calendar",
+				"type": "String"
+			},
+			{
+				"name": "Critical",
+				"type": "String"
+			},
+			{
+				"name": "Predecessors",
+				"type": "String"
+			},
+			{
+				"name": "Successors",
+				"type": "String"
+			},
+			{
+				"name": "Added Date",
+				"type": "String"
+			},
+			{
+				"name": "Added By",
+				"type": "String"
+			},
+			{
+				"name": "Activity Type",
+				"type": "String"
+			},
+			{
+				"name": "EWR_Key interface365",
+				"type": "String"
+			},
+			{
+				"name": "JB-G4",
+				"type": "String"
+			},
+			{
+				"name": "BL Project Start",
+				"type": "String"
+			},
+			{
+				"name": "BL Project Finish",
+				"type": "String"
+			},
+			{
+				"name": "BL1 Start",
+				"type": "String"
+			},
+			{
+				"name": "BL1 Finish",
+				"type": "String"
+			},
+			{
+				"name": "EWR_Funding",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,16 @@
+{
+	"name": "integrationRuntime13",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "UK South",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLiveInMinutes": 60
+				}
+			}
+		}
+	}
+}
